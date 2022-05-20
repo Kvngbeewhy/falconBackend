@@ -1,0 +1,3 @@
+config/default.production.json
+node_modules
+*.log
