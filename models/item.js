@@ -12,7 +12,6 @@ const ItemSchema = new mongoose.Schema({
       description: { type: String, default: ""},
       price: { type: String, default: ""},
       createdBy: String,
-      datecreated: {type: Date},
       lastmodifiedby: String,
       isdeleted: Boolean
 }, {timestamps: true})
@@ -28,7 +27,6 @@ const ItemAuditSchema = new mongoose.Schema({
       description: { type: String, default: ""},
       price: { type: String, default: ""},
       createdBy: String,
-      datecreated: Date,
       lastmodifiedby: String,
       isdeleted: Boolean
 }, {timestamps: true})

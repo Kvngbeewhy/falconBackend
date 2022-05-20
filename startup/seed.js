@@ -1,4 +1,5 @@
 const { User } = require("../models/user");
+const { Item } = require("../models/item")
 const bcrypt = require("bcryptjs");
 
 module.exports = async () => {
@@ -31,4 +32,19 @@ module.exports = async () => {
     console.log('seed user "admin" created...');
   }
   console.log(":-)");
+
+  const itemExist = await Item.findOne({
+    name: "Galaxy A5"
+  });
+
+  if (!itemExist) {
+    const item = await Item.create({
+      name: "Galaxy A5",
+      price: "100000",
+      quantity: "50",
+      description: "A new model whatever"
+    });
+    await item.save();
+    console.log('seed item created...');
 };
+}
