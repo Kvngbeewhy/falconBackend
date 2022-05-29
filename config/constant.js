@@ -40,9 +40,21 @@ const ITEM_CONSTANTS = {
 INVALID_ITEM: "Item not found",
 ITEM_CREATED: "Item is created",
 ITEM_UPDATED: "Item is Updated",
-ITEM_DELETED: "Item is deleted"
+ITEM_DELETED: "Item is deleted successfully"
 };
+const BRAND_CONSTANTS = {
+  NOT_FOUND: "Brand not found",
+  BRAND_CREATED: "Brand is created",
+  BRAND_UPDATED: "Brand is created",
+  BRAND_DELETED: "Brand is deleted"
 
+};
+const CATEGORY_CONSTANTS = {
+  NOT_FOUND: "Category not found",
+  CATEGORY_CREATED: "Category is succefully created",
+  CATEGORY_UPDATED: "Category updated successfully",
+  CATEGORY_DELETED: "Category is deleted successfully"
+};
 const USER_CONSTANTS = {
   INVALID_USER: "User with given id not found",
   UPDATE_SUCCESS: "User updated successfully",
@@ -73,3 +85,6 @@ module.exports.VERSION_CONSTANT = VERSION_CONSTANT;
 module.exports.TAB_CONSTANTS = TAB_CONSTANTS;
 module.exports.USER_CONSTANTS = USER_CONSTANTS;
 module.exports.ITEM_CONSTANTS = ITEM_CONSTANTS;
+module.exports.CATEGORY_CONSTANTS = CATEGORY_CONSTANTS;
+module.exports.BRAND_CONSTANTS = BRAND_CONSTANTS;
+

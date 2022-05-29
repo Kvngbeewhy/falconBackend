@@ -5,10 +5,16 @@ const users = require("../routes/users");
 const tabs = require("../routes/tabs");
 const reqLogger = require("../startup/logger");
 const error = require("../middleware/error");
+const category = require("../routes/category");
+const item = require("../routes/item");
+const brand = require("../routes/brand")
 
 module.exports = function (app) {
-  app.use(express.json());
+  app.use(express.json());  
   app.use(reqLogger);
+  app.use("/api/brand", brand);
+  app.use("/api/item", item);
+  app.use("/api/category", category);
   app.use("/api/version", appVersions);
   app.use("/api/user", users);
   app.use("/api/tab", tabs);

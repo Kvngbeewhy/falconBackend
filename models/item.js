@@ -44,6 +44,18 @@ const schema = {
 return Joi.validate(item, schema)
 }
 
+   function validateItemPut(item){
+    const schema = {
+        name: Joi.string().min(5).max(200).required(),
+        quantity: Joi.string().required(),
+        description: Joi.string().required(),
+        price: Joi.string().required(),
+        lastmodifiedBy: Joi.string().required(),
+    };
+    return Joi.validate(item, schema)
+}
+
 module.exports.Item = Item;
 module.exports.ItemAudit = ItemAudit;
 module.exports.validateItemPost = validateItemPost;
+module.exports.validateItemPut = validateItemPut;
