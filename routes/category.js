@@ -11,14 +11,10 @@ mongoose.set("debug", true);
 
 
 router.get("/", async (req,res) => {
-  let CategoryList = await Category.find({}, "-_id");
+  let CategoryList = await Item.find({}, "-_id");
     if (!CategoryList)
-      return res.status(400).send({
-        statusCode: 400,
-        message: "Failure",
-        data: CategoryList
-  })
-  return res.send({ statusCode: 200, message: "successful" });
+      res.send({ statusCode: 400, message: CATEGORY_CONSTANTS.NOT_FOUND});
+   res.send({ statusCode: 200,  data: { CategoryList } });
 
 });
 
