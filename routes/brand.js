@@ -55,8 +55,8 @@ router.put("/list", async (req, res) => {
   if (!brand)
     return res.status(400).send({
       statusCode: 400,
-      message: "Failure",
-      data: BRAND_CONSTANTS.NOT_FOUND,
+      message: BRAND_CONSTANTS.NOT_FOUND,
+      data: brand,
       
     });
   await logCurrentBrandState(brand);
@@ -114,7 +114,7 @@ router.delete("/:id", async (req, res) => {
     return res.status(400).send({
       statusCode: 400,
       message: "Failure",
-      data: BRAND_CONSTANTS.NOT_FOUND,
+      data: brand,
        });
   return res.send({ statusCode: 200, message: BRAND_CONSTANTS.BRAND_DELETED });
 });
