@@ -26,7 +26,7 @@ router.get("/getlist/:id", async (req, res)  => {
       res.status(400).send({
         statusCode: 400,
         message: "Failure",
-        data: ITEM_CONSTANTS.INVALID_ITEM
+        data: list
   })
 }
   else{
@@ -76,7 +76,7 @@ router.post("/", async (req, res) => {
       return res.status(400).send({
         statusCode: 400,
         message: "Failure",
-        data: ITEM_CONSTANTS.INVALID_ITEM,
+        data: item,
       });
     await logCurrentItemState(Item);
   
@@ -116,7 +116,7 @@ router.delete("/:id", async (req, res) => {
     return res.status(400).send({
       statusCode: 400,
       message: "Failure",
-      data: ITEM_CONSTANTS.INVALID_ITEM,
+      data: item,
        });
   return res.send({ statusCode: 200, message: ITEM_CONSTANTS.ITEM_DELETED });
 });
