@@ -19,11 +19,24 @@ router.get("/", async (req,res) => {
 });
 
 router.get("/getlist/:id", async (req, res)  => {
-  const { id } = req.params;
-  let item = await item.findOne({
-      _id: id});
-  if (!item) return response.error(res, ITEM_CONSTANTS.INVALID_ITEM,); 
-  return response.withDataAndMsg(res, item);
+  var id = req.params.id;
+  var list = Item.findById(id, function(err, data) {
+    if (err){
+      console.log(err);
+      res.status(400).send({
+        statusCode: 400,
+        message: "Failure",
+        data: ITEM_CONSTANTS.INVALID_ITEM
+  })
+}
+  else{
+      console.log("Invalid : ", data);
+    let resp = _.pick(data, ["name", "description", "quantity", "price", "_id"]);
+  res.send({ statusCode: 200, message: ITEM_CONSTANTS.ITEM_UPDATED, resp });
+
+  };
+  });
+
 
 });
 
