@@ -2,6 +2,7 @@ const config = require("config");
 const mongoose = require("mongoose");
 const response = require("../services/response");
 const express = require("express");
+const _ = require("lodash");
 const { Category,
    validateCategoryPut,
    CategoryAudit } = require("../models/category");
@@ -11,21 +12,56 @@ mongoose.set("debug", true);
 
 
 router.get("/", async (req,res) => {
-  let CategoryList = await Item.find({}, "-_id");
+  let CategoryList = await Category.find({}, "-_id");
     if (!CategoryList)
       res.send({ statusCode: 400, message: CATEGORY_CONSTANTS.NOT_FOUND});
    res.send({ statusCode: 200,  data: { CategoryList } });
 
 });
 
-router.get("/getlist/:id", async (req, res)  => {
-  const { id } = req.params;
-  let getlist = await Category.findOne({
-      _id: id});
-  if (!getlist) return response.error(res, CATEGORY_CONSTANTS.NOT_FOUND); 
-  return response.withDataAndMsg(res, "succssful");
+router.get("/list/:id", async (req, res)  => {
+  var id = req.params.id;
+  var list = Category.findById(id, function(err, data) {
+    if (err){
+      console.log(err);
+      res.status(400).send({
+        statusCode: 400,
+        message: "Failure",
+        data: list
+  })
+}
+  else{
+      console.log("Invalid : ", data);
+    let resp = _.pick(data, ["name", "_id"]);
+  res.send({ statusCode: 200, message: CATEGORY_CONSTANTS.CATEGORY_UPDATED, resp });
+
+  };
+  });
+
 
 });
+
+router.post("/", async (req, res) => {
+    const { name, description, price, quantity,createdBy } = req.body;
+  
+    try {
+      item = new Item({
+        name,
+        description,
+        price,
+        quantity,
+        createdBy
+      });
+  
+      // save item to db
+      await item.save();
+      return response.success(res, ITEM_CONSTANTS.ITEM_CREATED);
+    } catch (err) {
+      console.error(err.message);
+      return response.error(res, err.message, 500);
+    }
+  });
+
 
 router.post("/", async (req, res) => {
     const { name,createdBy} = req.body;
