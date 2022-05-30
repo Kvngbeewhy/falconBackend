@@ -2,6 +2,7 @@ const config = require("config");
 const mongoose = require("mongoose");
 const response = require("../services/response");
 const express = require("express");
+const _ = require("lodash");
 const router = express.Router();
 const {Brand , 
   validateBrandPut, BrandAudit} = require("../models/brand");
@@ -13,18 +14,31 @@ router.get("/", async (req,res) => {
     if(!brand)
     return res.status(400).send({
         statusCode: 400,
-        message: "Failure",
-        data: BRAND_CONSTANTS.NOT_FOUND,
+        message:  BRAND_CONSTANTS.NOT_FOUND,
+        data: brand,
   })
-  return res.send({ statusCode: 200, message: "successful" });
+  return res.send({ statusCode: 200, data: { brand }  });
 });
 
-router.get("/id", async (req,res) => {
-    const { id } = req.params;
-  let getlist = await Brand.findOne({
-      _id: id});
-  if (!getlist) return response.error(res, BRAND_CONSTANTS.NOT_FOUND); 
-  return response.withDataAndMsg(res, getlist);
+router.get("/:id", async (req, res)  => {
+  var id = req.params.id;
+  var list = Brand.findById(id, function(err, data) {
+    if (err){
+      console.log(err);
+      res.status(400).send({
+        statusCode: 400,
+        message:  BRAND_CONSTANTS.NOT_FOUND,
+        data: list
+  })
+}
+  else{
+      console.log("Invalid : ", data);
+    let resp = _.pick(data, ["name", "_id"]);
+  res.send({ statusCode: 200, message: 'successful', resp });
+
+  };
+  });
+
 
 });
 
