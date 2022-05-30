@@ -16,7 +16,7 @@ router.get("/", async (req,res) => {
       return res.status(400).send({
         statusCode: 400,
         message: "Failure",
-        data: CATEGORY_CONSTANTS.NOT_FOUND,
+        data: CategoryList
   })
   return res.send({ statusCode: 200, message: "successful" });
 

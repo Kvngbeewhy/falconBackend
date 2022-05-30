@@ -12,12 +12,9 @@ mongoose.set("debug", true);
 router.get("/", async (req,res) => {
   let itemList = await Item.find({}, "-_id");
     if (!itemList)
-      return res.status(400).send({
-        statusCode: 400,
-        message: "Failure",
-        data: ITEM_CONSTANTS.INVALID_ITEM,
-  })
-  return res.send({ statusCode: 200, message: "successful" });
+      res.send({ statusCode: 400, message: ITEM_CONSTANTS.INVALID_ITEM});
+   res.send({ statusCode: 200,  data: { itemList } });
+
 
 });
 
@@ -26,7 +23,7 @@ router.get("/getlist/:id", async (req, res)  => {
   let item = await item.findOne({
       _id: id});
   if (!item) return response.error(res, ITEM_CONSTANTS.INVALID_ITEM,); 
-  return response.withDataAndMsg(res, category);
+  return response.withDataAndMsg(res, item);
 
 });
 
