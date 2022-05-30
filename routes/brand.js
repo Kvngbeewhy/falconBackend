@@ -72,7 +72,6 @@ router.post("/", async (req,res) => {
   
     try {
       brand = new Brand({
-        id,
         name,
         description,
         createdBy
