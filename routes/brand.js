@@ -51,7 +51,7 @@ router.put("/list", async (req, res) => {
       data: error.details[0].message,
     });
     
-  var brand = brand.findOne(req.params.id);
+  var brand = Brand.findOne(req.body);
   if (!brand)
     return res.status(400).send({
       statusCode: 400,
@@ -63,7 +63,7 @@ router.put("/list", async (req, res) => {
 
   const { name, description, lastmodified } = req.body;
   try {
-    brand = new brand({
+    brand = new Brand({
       name,
       description,
       lastmodified

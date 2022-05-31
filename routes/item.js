@@ -71,7 +71,7 @@ router.post("/", async (req, res) => {
         data: error.details[0].message,
       });
       
-    var item = Item.findOne(req.params.id);
+    var item = Item.findOne(req.body);
     if (!item)
       return res.status(400).send({
         statusCode: 400,
