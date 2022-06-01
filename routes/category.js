@@ -101,11 +101,10 @@ router.post("/", async (req, res) => {
       });
     await logCurrentCategoryState(category);
   
-    const { name, description, lastmodifiedby } = req.body;
+    const { name, lastmodifiedby } = req.body;
     try {
       category = new Category({
         name,
-        description,
         lastmodifiedby
       });
   
