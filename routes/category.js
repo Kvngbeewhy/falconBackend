@@ -73,7 +73,7 @@ router.post("/category", async (req, res) => {
       });
   
       // save category to db
-      await Category.save();
+      await category.save();
       return response.success(res, CATEGORY_CONSTANTS.CATEGORY_CREATED);
     } catch (err) {
       console.error(err.message);
