@@ -63,7 +63,7 @@ router.post("/", async (req, res) => {
   });
 
 
-router.post("/", async (req, res) => {
+router.post("/category", async (req, res) => {
     const { name,createdBy} = req.body;
   
     try {
